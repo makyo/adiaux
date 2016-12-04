@@ -68,9 +68,11 @@ except:
     sys.exit(4)
 
 print('Okay, this is could take a LONG time')
-print('I am going to attempt to delete {} tweets, fifteen at a time.'.format(
-    len(tweets_to_delete)))
-print('However, I can only do fifteen every fifteen minutes and then I sleep.')
+print('I am going to attempt to delete {} tweets, as many as I can'
+      'at a time.'.format(
+          len(tweets_to_delete)))
+print('However, I can only do so many every *mumble* minutes and then I '
+      "sleep because of twitter's rate limiting.")
 print("Long time, right? I'm also going to be REALLY VERBOSE. Not sorry.")
 print('Maybe run this in a screen or tmux session.')
 confirm = input('Are you ready for this? [y/n]> ')
@@ -91,8 +93,8 @@ for tweet in tweets_to_delete:
     except Exception as e:
         print("{}: Couldn't destroy {} - already deleted? Moving on...".format(
             e, tweet))
-    if i % 15 == 0:
-        print('Rate limited, sleeping until we can continue')
+    if i % 25 == 0:
+        print('    {} deleted...'.format(i))
 
 print("I believe I'm done here, but you should go to twitter.com and check.")
 print('Be safe out there!')

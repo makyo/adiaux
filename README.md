@@ -55,7 +55,7 @@ Rate limited, sleeping until we can continue
 
 You'll have to confirm twice to be doubly sure. This is permanent, after all!
 
-**Caution:** this will take forever, and it will be *very* verbose.  Twitter is heavily rate-limited for apps doing this sort of thing - It's usually set up so that you can delete fifteen tweets every fifteen minutes.  Slow, right? So I suggest running this in a `screen` or `tmux` session and going to bed or out to dinner or something.
+**Caution:** this will take forever, and it will be *very* verbose.  Twitter is heavily rate-limited for apps doing this sort of thing. Could be slow, okay? So I suggest running this in a `screen` or `tmux` session and going to bed or out to dinner or something.
 
 ## Rationale
 
