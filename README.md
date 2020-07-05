@@ -6,8 +6,7 @@ Say adia&#365; to your old tweets.
 
 1. First, you'll need to create an app and generate all of your tokens. Go to <https://apps.twitter.com> and create a new app. Fill out your details (it's a pain), leaving the callback url blank. Click on the 'Keys and Access Tokens' tab and from there generate an access token.
 2. Store these tokens in `adiaux.ini` - the config entries should match up pretty well with what Twitter gives you
-3. Next, download your Twitter archive by going to your settings. At the bottom of the Account page, request your Twitter archive. Unzip this and keep the `tweets.csv` file handy.
-
+3. Next, download your Twitter archive by going to your settings. At the bottom of the Account page, request your Twitter archive. Unzip this and keep the `Data/tweets.js` file handy. You'll need to delete everything before the first `[` on the first line of the file (we want a JSON file, not a JS file)
 ## Running
 
 First, you'll need python and virtualenv, then you'll need to install the requirements. You can do this like so:
@@ -23,19 +22,19 @@ Then you can run the script like so:
 ```
 Usage: python adiaux.py archive before_date
 
-archive     - the csv file from your downloaded twitter archive
+archive     - the JSON file from your downloaded twitter archive
 before_date - the cut-off date for tweets; tweets posted before that date will
               be deleted.
 
 You must fill out adiaux.ini with your API keys.  See README.md for deets.
 ```
 
-It will attempt to load the tweets from the CSV file you gave it and check for tweets that were posted before the date you gave it. Next, it will attempt to connect to twitter with the credentials you gave it in the ini file. Finally, it will attempt to delete all of the tweets it found.
+It will attempt to load the tweets from the JSON file you gave it and check for tweets that were posted before the date you gave it. Next, it will attempt to connect to twitter with the credentials you gave it in the ini file. Finally, it will attempt to delete all of the tweets it found.
 
 If all goes well, you should see something like the following:
 
 ```
-$ python adiaux.py tweets.csv 2016-01-01
+$ python adiaux.py tweets.js 2016-01-01
 Parsing your twarchive...
 Verifying twitter creds...
 Okay, this is could take a LONG time

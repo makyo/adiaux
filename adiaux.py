@@ -1,5 +1,6 @@
-import csv
+from dateutil.parser import parse
 import datetime
+import json
 from six.moves import (
     configparser,
     input,
@@ -10,7 +11,7 @@ import twitter
 
 USAGE = '''Usage: python adiaux.py archive before_date
 
-archive     - the csv file from your downloaded twitter archive
+archive     - the JSON file from your downloaded twitter archive
 before_date - the cut-off date for tweets; tweets posted before that date will
               be deleted.
 
@@ -33,16 +34,18 @@ tweets_to_delete = []
 try:
     print('Parsing your twarchive...')
     with open(sys.argv[1]) as tweet_archive:
-        reader = csv.DictReader(tweet_archive)
+        reader = json.load(tweet_archive)
         for row in reader:
-            tweet_date = datetime.datetime.strptime(
-                row['timestamp'].split(' ')[0],
-                '%Y-%m-%d')
+            if 'tweet' not in row:
+                continue
+            tweet_date = parse(row['tweet']['created_at'])
+            if tweet_date is None:
+                continue
             delta = date_from.date() - tweet_date.date()
             if delta.days > 0:
                 # print("before_date: {} - tweet_date: {}".format(
                 #     date_from.date(), tweet_date.date()))
-                tweets_to_delete.append(row['tweet_id'])
+                tweets_to_delete.append(row['tweet']['id'])
 except Exception as e:
     print("    I couldn't open tweet archive file or file was malformed")
     print(e)
